@@ -5,7 +5,7 @@
  * More info at: https://developers.tme.eu
  */
 $token = '<put_your_token_here>';
-$secret_key = '<put_your_secret_here>';
+$app_secret = '<put_your_app_secret_here>';
 $params = array(
   'SymbolList' => array('1N4007'),
   'Country' => 'PL',
@@ -13,14 +13,14 @@ $params = array(
   'Language' => 'PL',
 );
 
-$response = api_call('Products/GetPrices', $params, $token, $secret_key);
+$response = api_call('Products/GetPrices', $params, $token, $app_secret);
 $array = json_decode($response, true);
 
 print_r($array);
 
 
 //---------------------------------------------------------
-function api_call($action, $params, $token, $secret_key)
+function api_call($action, $params, $token, $app_secret)
 {
     $api_url = 'https://api.tme.eu/' . $action . '.json';
     $curl = curl_init();
@@ -36,7 +36,7 @@ function api_call($action, $params, $token, $secret_key)
         http_build_query($params)
     );
     $signature_base = 'POST' . '&' . rawurlencode($api_url) . '&' . rawurlencode($encoded_params);
-    $api_signature  = base64_encode(hash_hmac('sha1', $signature_base, $secret_key, true));
+    $api_signature  = base64_encode(hash_hmac('sha1', $signature_base, $app_secret, true));
 
     $params['ApiSignature'] = $api_signature;
     //--
