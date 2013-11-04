@@ -20,7 +20,7 @@ print_r($array);
 
 
 //---------------------------------------------------------
-function api_call($action, $params, $token, $app_secret, $showHeader=false)
+function api_call($action, $params, $token, $app_secret, $show_header=false)
 {
     $api_url = 'https://api.tme.eu/' . $action . '.json';
     $curl = curl_init();
@@ -49,19 +49,15 @@ function api_call($action, $params, $token, $app_secret, $showHeader=false)
     curl_setopt($curl, CURLOPT_VERBOSE, 1);
     curl_setopt($curl, CURLOPT_HEADER, 1);
 
-//    $json_data = curl_exec($curl);
 
     $response = curl_exec($curl);
 
-    // Then, after your curl_exec call:
     $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
     $header = substr($response, 0, $header_size);
     $body = substr($response, $header_size);
 
-    if($showHeader){
-        echo "<HR><BR> Start Header --->";
+    if($show_header){
         print_r($header);
-        echo "<---- End Header <HR><BR>";
     }
 
     curl_close($curl);
