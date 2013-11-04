@@ -13,14 +13,14 @@ $params = array(
   'Language' => 'PL',
 );
 
-$response = api_call('Products/GetPrices', $params, $token, $app_secret);
+$response = api_call('Products/GetPrices', $params, $token, $app_secret, true);
 $array = json_decode($response, true);
 
 print_r($array);
 
 
 //---------------------------------------------------------
-function api_call($action, $params, $token, $app_secret)
+function api_call($action, $params, $token, $app_secret, $show_header=false)
 {
     $api_url = 'https://api.tme.eu/' . $action . '.json';
     $curl = curl_init();
@@ -46,9 +46,21 @@ function api_call($action, $params, $token, $app_secret)
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($curl, CURLOPT_VERBOSE, 1);
+    curl_setopt($curl, CURLOPT_HEADER, 1);
 
-    $json_data = curl_exec($curl);
+
+    $response = curl_exec($curl);
+
+    $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+    $header = substr($response, 0, $header_size);
+    $body = substr($response, $header_size);
+
+    if($show_header){
+        print_r($header);
+    }
+
     curl_close($curl);
     
-    return $json_data;
+    return $body;
 }
