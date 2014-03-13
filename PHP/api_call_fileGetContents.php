@@ -7,8 +7,8 @@
 
 include('misising_functions.php');
 
-$token = 'b050bd709a43eecc443820c022b6774ca703ddb216b6f6765f';//'<put_your_token_here>';
-$app_secret = '5656847466f0e5d08577';//<put_your_app_secret_here>';
+$token = '<put_your_token_here>';
+$app_secret = '<put_your_app_secret_here>';
 
 $params = array(
   'SymbolList' => array('1N4007'),
