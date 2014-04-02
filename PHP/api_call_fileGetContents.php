@@ -5,7 +5,7 @@
  * More info at: https://developers.tme.eu
  */
 
-include('misising_functions.php');
+include('missing_functions.php');
 
 $token = '<put_your_token_here>';
 $app_secret = '<put_your_app_secret_here>';

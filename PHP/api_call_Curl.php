@@ -5,10 +5,10 @@
  * More info at: https://developers.tme.eu
  */
  
+include('missing_functions.php');
+
 $token = '<put_your_token_here>';
 $app_secret = '<put_your_app_secret_here>';
-
-include('misising_functions.php');
 
 $params = array(
   'SymbolList' => array('1N4007'),
