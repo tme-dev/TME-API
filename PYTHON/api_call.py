@@ -1,11 +1,14 @@
-def product_import_tme(request):
+import collections, urllib, base64, hmac, hashlib, urllib2, json
+
+def product_import_tme():
     # /product/product_import_tme/
 
-    token = '<your's token(Anonymous key:)>'
-    app_secret = '<Application secret>'
+    token = '<TOKEN>'
+    app_secret = '<APP SECRET>'
 
     params = {
-        'SymbolList[0]': '1N4007',
+	'SymbolList[0]' : '1N4002',
+        'SymbolList[1]' : '1N4007',
         'Country': 'PL',
         'Currency': 'PLN',
         'Language': 'PL',
@@ -16,7 +19,7 @@ def product_import_tme(request):
     print response
 
 def api_call(action, params, token, app_secret, show_header=False):
-    api_url = u'https://api.tme.eu/' + action + '.json';
+    api_url = 'https://api.tme.eu/' + action + '.json';
     params['Token'] = token;
 
     params = collections.OrderedDict(sorted(params.items()))
@@ -44,3 +47,5 @@ def api_call(action, params, token, app_secret, show_header=False):
     res = urllib2.urlopen(req)
     html = res.read()
     return html
+
+print product_import_tme();
