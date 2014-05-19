@@ -1,3 +1,6 @@
+# TME API - example usage with Python
+# More info at: https://developers.tme.eu
+
 import collections, urllib, base64, hmac, hashlib, urllib2, json
 
 def product_import_tme():

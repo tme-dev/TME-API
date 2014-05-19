@@ -1,7 +1,6 @@
 <?php
-
 /**
- * TME API - code snippet.
+ * TME API - example usage with PHP & file_get_contents function.
  * More info at: https://developers.tme.eu
  */
 

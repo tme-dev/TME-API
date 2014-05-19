@@ -1,7 +1,6 @@
 <?php
-
 /**
- * TME API - code snippet.
+ * TME API - example usage with PHP & CURL.
  * More info at: https://developers.tme.eu
  */
  
