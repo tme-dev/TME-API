@@ -1,0 +1,13 @@
+{
+    "name": "tme-dev/api-connect-example",
+    "license": "MIT",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4" : {
+            "TMEApiConnect\\": "src/"
+        }
+    }
+}

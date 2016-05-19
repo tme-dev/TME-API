@@ -1,19 +1,20 @@
 <?php
+
 /**
  * TME API - example usage with PHP & CURL.
  * More info at: https://developers.tme.eu
  */
- 
-include('missing_functions.php');
+
+include(__DIR__ . '/lib/missing_functions.php');
 
 $token = '<put_your_token_here>';
 $app_secret = '<put_your_app_secret_here>';
 
 $params = array(
-  'SymbolList' => array('1N4007'),
-  'Country' => 'PL',
-  'Currency' => 'PLN',
-  'Language' => 'PL',
+    'SymbolList' => array('1N4007-DC'),
+    'Country'    => 'PL',
+    'Currency'   => 'PLN',
+    'Language'   => 'PL',
 );
 
 $response = api_call('Products/GetPrices', $params, $token, $app_secret, true);
@@ -21,9 +22,7 @@ $result = json_decode($response, true);
 
 print_r($result);
 
-
-//---------------------------------------------------------
-function api_call($action, $params, $token, $app_secret, $show_header=false)
+function api_call($action, $params, $token, $app_secret, $show_header = false)
 {
     $api_url = 'https://api.tme.eu/' . $action . '.json';
     $curl = curl_init();
@@ -39,10 +38,9 @@ function api_call($action, $params, $token, $app_secret, $show_header=false)
         http_build_query($params)
     );
     $signature_base = 'POST' . '&' . rawurlencode($api_url) . '&' . rawurlencode($encoded_params);
-    $api_signature  = base64_encode(hash_hmac('sha1', $signature_base, $app_secret, true));
+    $api_signature = base64_encode(hash_hmac('sha1', $signature_base, $app_secret, true));
 
     $params['ApiSignature'] = $api_signature;
-    //--
 
     curl_setopt($curl, CURLOPT_URL, $api_url);
     curl_setopt($curl, CURLOPT_POST, true);
@@ -52,18 +50,17 @@ function api_call($action, $params, $token, $app_secret, $show_header=false)
     curl_setopt($curl, CURLOPT_VERBOSE, 1);
     curl_setopt($curl, CURLOPT_HEADER, 1);
 
-
     $response = curl_exec($curl);
 
     $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
     $header = substr($response, 0, $header_size);
     $body = substr($response, $header_size);
 
-    if($show_header){
+    if ($show_header) {
         print_r($header);
     }
 
     curl_close($curl);
-    
+
     return $body;
 }

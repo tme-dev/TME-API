@@ -1,25 +1,23 @@
 <?php
 /**
- * TME API - example usage with PHP & file_get_contents function.
+ * TME API - example usage with PHP && file_get_contents function.
  * More info at: https://developers.tme.eu
  */
 
-include('missing_functions.php');
+include(__DIR__ . '/lib/missing_functions.php');
 
 $token = '<put_your_token_here>';
 $app_secret = '<put_your_app_secret_here>';
 
 $params = array(
-  'SymbolList' => array('1N4007'),
-  'Country' => 'PL',
-  'Currency' => 'PLN',
-  'Language' => 'PL',
+    'SymbolList' => array('1N4007'),
+    'Country'    => 'PL',
+    'Currency'   => 'PLN',
+    'Language'   => 'PL',
 );
 
 $response = api_call('Products/GetPrices', $params, $token, $app_secret, true);
 $result = json_decode($response, true);
-
-var_dump(PHP_VERSION);
 
 echo '<pre>';
 print_r($result);
@@ -27,7 +25,7 @@ echo '</pre>';
 
 
 //---------------------------------------------------------
-function api_call($action, $params, $token, $app_secret, $show_header=false)
+function api_call($action, $params, $token, $app_secret, $show_header = false)
 {
     $api_url = 'https://api.tme.eu/' . $action . '.json';
 
@@ -41,19 +39,20 @@ function api_call($action, $params, $token, $app_secret, $show_header=false)
         array('%20', '~'),
         http_build_query($params)
     );
-    
+
     $signature_base = 'POST' . '&' . rawurlencode($api_url) . '&' . rawurlencode($encoded_params);
-    $api_signature  = base64_encode(hash_hmac('sha1', $signature_base, $app_secret, true));
+    $api_signature = base64_encode(hash_hmac('sha1', $signature_base, $app_secret, true));
 
     $params['ApiSignature'] = $api_signature;
-  
-  	$opts = array('http' =>
-  		array(
-  			'method'  => 'POST',
-  			'header'  => 'Content-type: application/x-www-form-urlencoded',
-  			'content' => http_build_query($params)
-  		)
-  	);
-    
+
+    $opts = array(
+        'http' =>
+            array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'content' => http_build_query($params),
+            ),
+    );
+
     return file_get_contents($api_url, false, stream_context_create($opts));
 }
