@@ -58,11 +58,11 @@ class RequestSigner
      */
     private function getSignature(UriInterface $requestUri, array $parameters)
     {
-        ksort($parameters);
+        $parameters = $this->sortSignatureParams($parameters);
+
         $queryString = http_build_query($parameters, null, '&', PHP_QUERY_RFC3986);
         $signatureBase = strtoupper('POST') .
             '&' . rawurlencode($this->getUrl($requestUri)) . '&' . rawurlencode($queryString);
-
 
         return base64_encode(hash_hmac('sha1', $signatureBase, $this->credentials->getSecret(), true));
     }
@@ -75,5 +75,24 @@ class RequestSigner
     private function getUrl(UriInterface $requestUri)
     {
         return $requestUri->getScheme() . '://' . $requestUri->getHost() . $requestUri->getPath();
+    }
+
+    /**
+     * Sort signature params recursively.
+     *
+     * @param array $params
+     * @return array
+     */
+    private function sortSignatureParams(array $params)
+    {
+        ksort($params);
+
+        foreach ($params as &$value) {
+            if (is_array($value)) {
+                $value = $this->sortSignatureParams($value);
+            }
+        }
+
+        return $params;
     }
 }
