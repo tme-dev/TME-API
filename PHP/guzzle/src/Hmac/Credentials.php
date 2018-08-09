@@ -1,6 +1,6 @@
 <?php
 
-namespace TMEApiConnect\Hmac;
+namespace TMEApi\Hmac;
 
 /**
  * For signing requests.

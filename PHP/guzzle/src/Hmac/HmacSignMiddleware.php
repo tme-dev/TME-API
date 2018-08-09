@@ -1,13 +1,13 @@
 <?php
 
-namespace TMEApiConnect\Hmac;
+namespace TMEApi\Hmac;
 
 use Psr\Http\Message\RequestInterface;
 
 class HmacSignMiddleware
 {
     /**
-     * @var \TMEApiConnect\Hmac\RequestSigner
+     * @var \TMEApi\Hmac\RequestSigner
      */
     private $requestSigner;
 
