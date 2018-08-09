@@ -1,6 +1,6 @@
 <?php
 
-namespace TMEApiConnect\Hmac;
+namespace TMEApi\Hmac;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;

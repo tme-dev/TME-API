@@ -3,13 +3,14 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 
-$token = '<put_your_token_here>';
-$app_secret = '<put_your_app_secret_here>';
+// Register your app here https://developers.tme.eu/en/dev
+const TOKEN = '';
+const SECRET = '';
 
 require 'vendor/autoload.php';
 
-$credentials = new \TMEApiConnect\Hmac\Credentials($token, $app_secret);
-$middleware = new \TMEApiConnect\Hmac\HmacSignMiddleware($credentials);
+$credentials = new \TMEApi\Hmac\Credentials(TOKEN, SECRET);
+$middleware = new \TMEApi\Hmac\HmacSignMiddleware($credentials);
 
 // Register the middleware.
 $stack = HandlerStack::create();
@@ -31,5 +32,6 @@ $options = [
         'Language' => 'EN',
     ],
 ];
+
 $result = $client->request('POST', 'https://api.tme.eu/Products/GetProducts.json', $options);
 print_r(json_decode($result->getBody(), true));
