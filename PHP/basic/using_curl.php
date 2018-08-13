@@ -5,7 +5,7 @@
  * More info at: https://developers.tme.eu
  */
 
-include(__DIR__ . '/lib/missing_functions.php');
+include __DIR__ . '/lib/missing_functions.php';
 
 $token = '<put_your_token_here>';
 $app_secret = '<put_your_app_secret_here>';
