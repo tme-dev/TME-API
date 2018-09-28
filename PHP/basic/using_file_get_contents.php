@@ -4,10 +4,8 @@
  * More info at: https://developers.tme.eu
  */
 
-include(__DIR__ . '/lib/missing_functions.php');
-
-$token = '<put_your_token_here>';
-$app_secret = '<put_your_app_secret_here>';
+const TOKEN = '<put_your_token_here>';
+const APP_SECRET = '<put_your_app_secret_here>';
 
 $params = array(
     'SymbolList' => array('1N4007'),
@@ -16,7 +14,7 @@ $params = array(
     'Language'   => 'PL',
 );
 
-$response = api_call('Products/GetPrices', $params, $token, $app_secret, true);
+$response = api_call('Products/GetPrices', $params);
 $result = json_decode($response, true);
 
 echo '<pre>';
@@ -25,25 +23,10 @@ echo '</pre>';
 
 
 //---------------------------------------------------------
-function api_call($action, $params, $token, $app_secret, $show_header = false)
+function api_call($action, array $params)
 {
-    $api_url = 'https://api.tme.eu/' . $action . '.json';
-
-    // calculate HMAC-SHA1 signature
-    $params['Token'] = $token;
-    ksort($params);
-
-    // In PHP 5.4 http_build_query() offers enc_type parameter (PHP_QUERY_RFC3986) which replaces bellow snippet.
-    $encoded_params = str_replace(
-        array('+', '%7E'),
-        array('%20', '~'),
-        http_build_query($params)
-    );
-
-    $signature_base = 'POST' . '&' . rawurlencode($api_url) . '&' . rawurlencode($encoded_params);
-    $api_signature = base64_encode(hash_hmac('sha1', $signature_base, $app_secret, true));
-
-    $params['ApiSignature'] = $api_signature;
+    $params['Token'] = TOKEN;
+    $params['ApiSignature'] = getSignature($action, $params, APP_SECRET);
 
     $opts = array(
         'http' =>
@@ -54,5 +37,34 @@ function api_call($action, $params, $token, $app_secret, $show_header = false)
             ),
     );
 
-    return file_get_contents($api_url, false, stream_context_create($opts));
+    return file_get_contents(getUrl($action), false, stream_context_create($opts));
+}
+
+function getSignature($action, array $parameters, $appSecret)
+{
+    $parameters = sortSignatureParams($parameters);
+
+    $queryString = http_build_query($parameters, null, '&', PHP_QUERY_RFC3986);
+    $signatureBase = strtoupper('POST') .
+        '&' . rawurlencode(getUrl($action)) . '&' . rawurlencode($queryString);
+
+    return base64_encode(hash_hmac('sha1', $signatureBase, $appSecret, true));
+}
+
+function getUrl($action)
+{
+    return 'https://api.tme.eu/' . $action . '.json';
+}
+
+function sortSignatureParams(array $params)
+{
+    ksort($params);
+
+    foreach ($params as &$value) {
+        if (is_array($value)) {
+            $value = sortSignatureParams($value);
+        }
+    }
+
+    return $params;
 }
