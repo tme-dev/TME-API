@@ -1,6 +1,4 @@
 TME-API Guzzle example
 ======================
 
-[Composer](https://getcomposer.org) is required to use this example.
-
-    composer install
+Guzzle example is now available in [this repository](https://github.com/tme-dev/api-client-guzzle). 

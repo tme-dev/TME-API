@@ -8,6 +8,7 @@
 const TOKEN = '<put_your_token_here>';
 const APP_SECRET = '<put_your_app_secret_here>';
 
+
 $params = array(
     'SymbolList' => array('1N4007-DC'),
     'Country'    => 'PL',
