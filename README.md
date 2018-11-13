@@ -12,17 +12,17 @@ Developer center at https://developers.tme.eu
 
 ## Golang
 
-https://github.com/krzych82/tmeapi-go
+https://github.com/tme-dev/api-client-go
 
 ## Javascript
 
-* You could use this repository: https://github.com/piotrkochan/tme-api-client
+https://github.com/piotrkochan/tme-api-client
 
 ## C#
 
-* [C# example](./C%23)
+[C# example](./C%23)
 
 ## Python
 
-* [Python example](./Python)
+[Python example](./Python)
 
