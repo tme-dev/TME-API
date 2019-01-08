@@ -22,6 +22,10 @@ https://github.com/piotrkochan/tme-api-client
 
 [C# example](./C%23)
 
+## Java
+
+https://github.com/michallepek/tme-api-client-java-example
+
 ## Python
 
 [Python example](./Python)
