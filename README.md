@@ -26,6 +26,10 @@ https://github.com/piotrkochan/tme-api-client
 
 https://github.com/michallepek/tme-api-client-java-example
 
+## Scala
+
+https://github.com/michallepek/tme-api-client-scala-example
+
 ## Python
 
 [Python example](./Python)
