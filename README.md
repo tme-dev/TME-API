@@ -7,7 +7,7 @@ Developer center at https://developers.tme.eu
 
 ## PHP
 
-* [Guzzle example](./PHP/guzzle), also see ([see Guzzle on GitHub](https://github.com/guzzle/guzzle))
+* [Guzzle example](https://github.com/tme-dev/api-client-guzzle), also see ([see Guzzle on GitHub](https://github.com/guzzle/guzzle))
 * [CURL and file_get_contents example](./PHP/basic)
 
 ## Golang
