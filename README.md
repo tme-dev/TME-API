@@ -7,7 +7,7 @@ Developer center at https://developers.tme.eu
 
 ## PHP
 
-* [Guzzle example](https://github.com/tme-dev/api-client-guzzle), also see ([see Guzzle on GitHub](https://github.com/guzzle/guzzle))
+* [Guzzle Library](https://github.com/guzzle/guzzle) example https://github.com/tme-dev/api-client-guzzle
 * [CURL and file_get_contents example](./PHP/basic)
 
 ## Golang
@@ -32,6 +32,6 @@ https://github.com/michallepek/tme-api-client-scala-example
 
 ## Python
 
-[Python3 Client by krzych82](https://github.com/krzych82/api-client-python3)
+Python3 Client by krzych82 https://github.com/krzych82/api-client-python3
 
 [Python example](./Python)
