@@ -33,5 +33,5 @@ https://github.com/michallepek/tme-api-client-scala-example
 ## Python
 
 [Python3 Client by krzych82](https://github.com/krzych82/api-client-python3)
-[Python example](./Python)
 
+[Python example](./Python)
