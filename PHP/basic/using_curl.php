@@ -29,6 +29,7 @@ function api_call($action, array $params, $show_header = false)
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, getUrl($action));
     curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
